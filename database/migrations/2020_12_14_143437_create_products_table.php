@@ -13,15 +13,22 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
+
         Schema::create('products', function (Blueprint $table) {
             $table->id();
 
             $table->string('name',100);
             $table->float('price',8,2);
-            $table->integer('quantity');
+            $table->integer('quantity')->nullable();
             $table->text('description');
-            $table->enum('status',['1','0']);
+            $table->string('img')->nullable();
+            $table->enum('status',['1','0'])->nullable();
 
+            // $table->foreginId('category_id')->constrained();
+            // $table->unsignedBigInteger('category_id');
+            // $table->foreign('category_id')->references('id')->on('categories');
+            // $table->foreignId('category_id')->constrained('categories');
+            // $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }

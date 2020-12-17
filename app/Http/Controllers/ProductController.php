@@ -2,87 +2,131 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
+use App\Http\Requests\EditProductRequest;
 use App\Product;
+use App\Category;
+use App\Traits\ProductTrait;
+use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller
 {
-    
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    use ProductTrait;
+
     public function index()
     {
-        $products= product::get();
-        // dd($products);
-        return $products;
+        $products= Product::with('category')->paginate(7);
+
+        if(!$products)
+            return redirect()->back()->with(['error'=>'There is no products']);
+            
+        return view('products.allproducts',compact(['products']));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $categories = Category::get();
+        if(!$categories)
+            return view('products.create');
+        return view('products.create',compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+
+        // validation and messages errors in request ProductRequest
+
+        // upload Image
+        $img_name = $this->saveImage( $request->img );
+        
+        // create product
+        Product::create([
+            'name'=>$request->name,
+            'price'=>$request->price,
+            'img'=>$img_name,
+            'description'=>$request->description,
+            'category_id'=>$request->category_id,
+        ]);
+
+        // creation successfully return with success message
+        return redirect()->back()->with('success',"$request->name Is Added Successfully");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $product =Product::findOrFail($id);
-        dd($product);
+
+        $category = Category::find($product->category_id);
+        
+        $count = Product::where('category_id','=',$product->category_id)->count();
+
+        return view('products/show',compact(['product','category','count']));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
-    }
+        $product = Product::findOrFail($id);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+        $categories = Category::get();
+        
+        return view('products.edit',compact(['product','categories']));
+    }
+    
+    public function update(EditProductRequest $request, $id)
     {
-        //
+                // validation and messages errors in request ProductRequest
+
+                $product = Product::findOrFail($id);
+                $image = $request->img;
+                $oldImage= $product->img;
+
+                if($request->hasFile('img')){				
+                    // delete the old
+                    if(($image) !== null){
+                        unlink( public_path("images/$oldImage") );
+                    }
+
+                    $img_name = $this->saveImage( $request->img );
+
+                    // dd($extention);
+                    $product->update([
+                        'name'=> $request->name,
+                        'price'=> $request->price,
+                        'img'=> $img_name,
+                        'description'=> $request->description,
+                        'category_id'=> $request->category_id,
+                    ]);
+                }
+
+                $product->update([
+                    'name'=> $request->name,
+                    'price'=> $request->price,
+                    'description'=> $request->description,
+                    'category_id'=> $request->category_id,
+                ]);
+
+                return redirect()->back()->with(['success'=>'the product updated successfully']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        // find product with all columns 
+        $product =Product::findOrFail($id);
+
+        // find img
+        $img=$product->img;
+        
+        // if the img exists delete it
+        if(($img) !== null){
+            unlink( public_path("images/$img") );
+        }
+        
+        // delete product after deleteing the image
+        $product->delete();
+
+        // return success message with deleted item
+        return back()->with(['success'=>'product deleted successfully']);
     }
+
 }
