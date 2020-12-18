@@ -50,7 +50,7 @@ class ProductController extends Controller
         ]);
 
         // creation successfully return with success message
-        return redirect()->back()->with('success',"$request->name Is Added Successfully");
+        return redirect()->back()->with('success',"$request->name Product Is Added Successfully");
     }
 
     public function show($id)

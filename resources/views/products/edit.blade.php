@@ -30,7 +30,7 @@
             <label class="font-weight-bold" for="categories">Categories</label>
             <select class="form-control" id="categories" name="category_id">
                 @foreach($categories as $cat)
-                    <option value="{{ $cat->id }}"  @if( $cat->id == $product->id) selected  @endif > {{$product->category->name}} </option>
+                    <option value="{{ $cat->id }}"  @if( $cat->id == $product->category_id) selected  @endif > {{$cat->name}} </option>
                 @endforeach
             </select>
                   {{-- {{$cat->id}}  {{$cat->name}} <br> 
