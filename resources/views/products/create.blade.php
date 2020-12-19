@@ -26,11 +26,29 @@
        <div class="form-group">
             <label class="font-weight-bold" for="categories">Categories</label>
             <select class="form-control" id="categories" name="category_id">
+                <option value="" selected> Options ... </option>
                 @foreach($categories as $cat)
                     <option value="{{ $cat->id }}"> {{$cat->name}} </option>
                 @endforeach
             </select>
         </div>
+
+        {{-- ------------------------------------------ --}}
+        {{-- <div class="form-group">
+            <select name="category" id="category" class="form-control input-sm">
+                @foreach($categories as $a)
+                <option value="{{$a}}">{{$a}}</option>
+                    @endforeach
+            </select>
+        </div> --}}
+
+        <div class="form-group">
+            <label class="font-weight-bold" for="categories">SubCategories</label>
+            <select name="subcategory" id="subcategory" class="form-control input-sm">
+                    <option class="font-weight-bold" value=""></option>
+            </select>
+        </div>
+        {{-- ------------------------------------------ --}}
 
         <div class="form-group">
             <label class="font-weight-bold" for="exampleFormControlTextarea1">Description</label>
@@ -40,4 +58,27 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
+@endsection
+@section('scripts')
+    <script>
+        console.log('ssssssssssssssssssssssssss');
+        $(document).ready(function () { 
+            // $.get('/ajax-subcat?cat_id='+ cat_id,function(data){});
+                $('#categories').on('change',function(e){
+                    // console.log(e);
+                    var cat_id = e.target.value;
+                    console.log(cat_id);
+                    //ajax
+                    $.get('/ajax-subcat?cat_id='+ cat_id,function(data){
+                        //success data
+                    console.log(data);
+                        $('#subcategory').empty();
+                    $.each(data,function(index,subcatObj){
+                        // var option = $('<option/>', {id:create, value:subcatObj});
+                        $('#subcategory').append('<option class="" style="font-size:16px" value="'+subcatObj.value+'">'+subcatObj.name+'</option>');
+                    });
+                });
+            });
+        });
+    </script>
 @endsection

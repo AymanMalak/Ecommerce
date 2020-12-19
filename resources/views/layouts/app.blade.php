@@ -8,13 +8,13 @@
         @include('inc.nav')
         <main class="py-4">
             <div class="container">
-                
-            @yield('content')
+                @yield('content')
             </div>
         </main>
     </div>
 
     @include('inc.footer')
+
     @yield('scripts')
     
 </body>

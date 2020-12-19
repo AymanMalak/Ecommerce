@@ -15,10 +15,13 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        $categories =Category::get();
-        $subCategories=SubCategory::with('category')->get();
-        // dd($subCategories);
-        return view('categories.create',compact(['subCategories','categories']));
+        // $categories = Category::find(3);
+        $categories= Category::where('id',3)->get();
+
+        $subcategories= SubCategory::where('category_id',3)->get();
+        
+        // return $categories;
+        return view('categories.create',compact(['subcategories','categories']));
     }
 
     /**
@@ -26,9 +29,22 @@ class SubCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        // $categories = Category::get();
+        // $subCategories=SubCategory::with('category')->get();
+        // $subcategories= SubCategory::where('category_id',3)->get();
+
+        // dd($subcategories->name);
+        
+        // return $categories;
+
+            $cat_id = $request->cat_id;
+        
+            $subcategories = Subcategory::where('category_id','=',$cat_id)->get();
+            
+            return Response()->json($subcategories);
+        
     }
 
     /**

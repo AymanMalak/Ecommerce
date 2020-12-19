@@ -1,6 +1,9 @@
 <?php
 
+// use Facade\FlareClient\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\Console\Input\Input;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,8 +54,22 @@ Route::post('category/store', 'CategoryController@store')->name('category.store'
 Route::get('category/edit/{id}', 'CategoryController@edit')->name('category.edit');
 Route::post('category/update/{id}', 'CategoryController@update')->name('category.update');
 
-// Route::post('category/destroy/{id}', 'CategoryController@destroy')->name('category.destroy');
+Route::get('category/destroy/{id}', 'CategoryController@destroy')->name('category.destroy');
 // ------------------------------------------------------------------------
 Route::get('/nn', function(){
     return view('NotFound');
 });
+Route::get('/subcategory', 'SubCategoryController@index');
+
+Route::get('/ajax-subcat','SubCategoryController@create');
+
+// Route::get('/ajax-subcat',function (Request $request) {
+
+//     $cat_id = $request->cat_id;
+//     // ::get('cat_id');
+
+//     $subcategories = Subcategory::where('category_id','=',$cat_id)->get();
+    
+//     return Response()->json($subcategories);
+
+// });

@@ -26,10 +26,11 @@ class CreateProductsTable extends Migration
 
             // $table->foreignId('category_id')->constrained('categories');
             $table->unsignedBigInteger('category_id');
+            // $table->foreignId('category_id')->constrained('categories');
 
             // $table->foreign('category_id')->references('id')->on('categories');
             // $table->foreignId('category_id')->constrained('categories');
-            // $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories');
 
             $table->timestamps();
         });
