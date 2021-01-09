@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    
+
 
 
 
@@ -8,9 +8,9 @@
 
 <div class="container py-3">
     @if($count > 1)
-    <h1 class="text-center font-weight-bold  text-primary">There are {{$count}} {{$category->name}}s</h1>
+    <h1 class="text-center font-weight-bold  text-primary">There are {{$count}} {{$category->name}}S</h1>
     @else
-    <h1 class="text-center font-weight-bold  text-primary">There is {{$count}} {{$category->name}}s</h1>
+    <h1 class="text-center font-weight-bold  text-primary">There is {{$count}} {{$category->name}}</h1>
     @endif
     <div class="row">
         <div class="col-md-6 pt-3">

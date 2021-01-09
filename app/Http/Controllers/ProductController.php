@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 // use Illuminate\Http\Request;
-use App\Http\Requests\ProductRequest;
-use App\Http\Requests\EditProductRequest;
+use App\Http\Requests\ProductRequest\AddProductRequest;
+use App\Http\Requests\ProductRequest\EditProductRequest;
 use App\Product;
 use App\Category;
 use App\Traits\ProductTrait;
 use Illuminate\Support\Facades\Validator;
+
 class ProductController extends Controller
 {
 
@@ -20,7 +21,7 @@ class ProductController extends Controller
 
         if(!$products)
             return redirect()->back()->with(['error'=>'There is no products']);
-            
+
         return view('products.allproducts',compact(['products']));
     }
 
@@ -32,18 +33,19 @@ class ProductController extends Controller
         return view('products.create',compact('categories'));
     }
 
-    public function store(ProductRequest $request)
+    public function store(AddProductRequest $request)
     {
 
         // validation and messages errors in request ProductRequest
 
         // upload Image
         $img_name = $this->saveImage( $request->img );
-        
+
         // create product
         Product::create([
             'name'=>$request->name,
             'price'=>$request->price,
+            'quantity'=>$request->quantity,
             'img'=>$img_name,
             'description'=>$request->description,
             'category_id'=>$request->category_id,
@@ -58,7 +60,7 @@ class ProductController extends Controller
         $product =Product::findOrFail($id);
 
         $category = Category::find($product->category_id);
-        
+
         $count = Product::where('category_id','=',$product->category_id)->count();
 
         return view('products/show',compact(['product','category','count']));
@@ -69,10 +71,10 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
         $categories = Category::get();
-        
+
         return view('products.edit',compact(['product','categories']));
     }
-    
+
     public function update(EditProductRequest $request, $id)
     {
                 // validation and messages errors in request ProductRequest
@@ -81,7 +83,7 @@ class ProductController extends Controller
                 $image = $request->img;
                 $oldImage= $product->img;
 
-                if($request->hasFile('img')){				
+                if($request->hasFile('img')){
                     // delete the old
                     if(($image) !== null){
                         unlink( public_path("images/$oldImage") );
@@ -102,6 +104,7 @@ class ProductController extends Controller
                 $product->update([
                     'name'=> $request->name,
                     'price'=> $request->price,
+                    'quantity'=> $request->quantity,
                     'description'=> $request->description,
                     'category_id'=> $request->category_id,
                 ]);
@@ -111,17 +114,17 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        // find product with all columns 
+        // find product with all columns
         $product =Product::findOrFail($id);
 
         // find img
         $img=$product->img;
-        
+
         // if the img exists delete it
         if(($img) !== null){
             unlink( public_path("images/$img") );
         }
-        
+
         // delete product after deleteing the image
         $product->delete();
 

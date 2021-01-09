@@ -25,10 +25,10 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 // ------------------------------------------------------------------------
 Route::resource('product','ProductController');
 // ------------------------------------------------------------------------
+// select all products
+Route::get('/', 'ProductController@index')->name('product.index');
 Route::group(['prefix' => 'product','middleware'=>'auth'], function () {
 
-    // select all products
-    Route::get('/', 'ProductController@index')->name('product.index');
 
     // show one product
     Route::get('/{id}', 'ProductController@show')->name('product.show');
@@ -40,13 +40,14 @@ Route::group(['prefix' => 'product','middleware'=>'auth'], function () {
     // edit a product
     Route::get('/edit/{id}', 'ProductController@edit')->name('product.edit');
     Route::post('/update/{id}', 'ProductController@update')->name('product.update');
-    
+
     // delete a product
     Route::get('/destroy/{id}', 'ProductController@destroy')->name('product.destroy');
 
 });
 // ------------------------------------------------------------------------
 // Route::resource('category','SubCategoryController');
+// category
 Route::get('/category', 'CategoryController@index')->name('category.index');
 
 Route::get('category/create', 'CategoryController@create')->name('category.create');
@@ -56,20 +57,19 @@ Route::post('category/update/{id}', 'CategoryController@update')->name('category
 
 Route::get('category/destroy/{id}', 'CategoryController@destroy')->name('category.destroy');
 // ------------------------------------------------------------------------
+// subcategory
+Route::get('/subcategory', 'SubCategoryController@index');
+
+Route::get('subcategory/create', 'SubCategoryController@create')->name('subcategory.create');
+Route::post('subcategory/store', 'SubCategoryController@store')->name('subcategory.store');
+Route::get('subcategory/edit/{id}', 'SubCategoryController@edit')->name('subcategory.edit');
+Route::post('subcategory/update/{id}', 'SubCategoryController@update')->name('subcategory.update');
+
+Route::get('subcategory/destroy/{id}', 'SubCategoryController@destroy')->name('subcategory.destroy');
+// ------------------------------------------------------------------------
+// ajax
+Route::get('/ajax-subcat','SubCategoryController@ajax');
+// ------------------------------------------------------------------------
 Route::get('/nn', function(){
     return view('NotFound');
 });
-Route::get('/subcategory', 'SubCategoryController@index');
-
-Route::get('/ajax-subcat','SubCategoryController@create');
-
-// Route::get('/ajax-subcat',function (Request $request) {
-
-//     $cat_id = $request->cat_id;
-//     // ::get('cat_id');
-
-//     $subcategories = Subcategory::where('category_id','=',$cat_id)->get();
-    
-//     return Response()->json($subcategories);
-
-// });

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\CategoryRequest;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditProductRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,6 @@ class EditProductRequest extends FormRequest
     {
         return [
                 'name'=>'required|string|max:100',
-                'price'=>'required|numeric',
-                'img'=>'nullable|image|mimes:jpg,jpeg,png,webp',
-                'description'=>'required|string',
-                'category_id' => 'required|exists:categories,id',
         ];
     }
 
@@ -36,9 +32,6 @@ class EditProductRequest extends FormRequest
     {
         return [
                 "name.required" =>  __("name is required"),
-                "img.required" => __("img is required"),
-                "description.required" =>  __("description is required"),
-                "price.required" => __("price is required"),
         ];
     }
 }

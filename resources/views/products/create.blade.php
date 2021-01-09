@@ -7,6 +7,7 @@
     @include('inc.messages')
 
     <form action="{{route('product.store')}}" method="post" enctype="multipart/form-data">
+
         @csrf
         <div class="form-group">
             <label class="font-weight-bold" for="name">Name</label>
@@ -15,9 +16,14 @@
 
        <div class="form-group">
             <label class="font-weight-bold" for="price">Price</label>
-            <input type="text" name="price" class="form-control" id="price"  placeholder="Enter price">
+            <input type="text" name="price" class="form-control" id="price"  placeholder="Enter Price">
         </div>
-        
+
+        <div class="form-group">
+            <label class="font-weight-bold" for="price">Quantity</label>
+            <input type="text" name="quantity" class="form-control" id="price"  placeholder="Enter Quantity">
+        </div>
+
        <div class="form-group">
             <label class="font-weight-bold" for="price">Image</label>
             <input type="file" name="img" class="form-control" id=""  placeholder="">
@@ -33,14 +39,6 @@
             </select>
         </div>
 
-        {{-- ------------------------------------------ --}}
-        {{-- <div class="form-group">
-            <select name="category" id="category" class="form-control input-sm">
-                @foreach($categories as $a)
-                <option value="{{$a}}">{{$a}}</option>
-                    @endforeach
-            </select>
-        </div> --}}
 
         <div class="form-group">
             <label class="font-weight-bold" for="categories">SubCategories</label>
@@ -48,6 +46,7 @@
                     <option class="font-weight-bold" value=""></option>
             </select>
         </div>
+
         {{-- ------------------------------------------ --}}
 
         <div class="form-group">
@@ -61,8 +60,8 @@
 @endsection
 @section('scripts')
     <script>
-        console.log('ssssssssssssssssssssssssss');
-        $(document).ready(function () { 
+        // console.log('ssssssssssssssssssssssssss');
+        $(document).ready(function () {
             // $.get('/ajax-subcat?cat_id='+ cat_id,function(data){});
                 $('#categories').on('change',function(e){
                     // console.log(e);

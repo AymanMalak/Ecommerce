@@ -19,7 +19,7 @@ class SubCategoryController extends Controller
         $categories= Category::where('id',3)->get();
 
         $subcategories= SubCategory::where('category_id',3)->get();
-        
+
         // return $categories;
         return view('categories.create',compact(['subcategories','categories']));
     }
@@ -29,22 +29,22 @@ class SubCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function ajax(Request $request)
     {
         // $categories = Category::get();
         // $subCategories=SubCategory::with('category')->get();
         // $subcategories= SubCategory::where('category_id',3)->get();
 
         // dd($subcategories->name);
-        
+
         // return $categories;
 
             $cat_id = $request->cat_id;
-        
+
             $subcategories = Subcategory::where('category_id','=',$cat_id)->get();
-            
+
             return Response()->json($subcategories);
-        
+
     }
 
     /**
@@ -53,9 +53,23 @@ class SubCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function create()
+    {
+        $subcategories = SubCategory::with('category')->get();
+        $categories = Category::get();
+        return view('subcategories.create',compact(['subcategories','categories']));
+    }
     public function store(Request $request)
     {
-        //
+
+        SubCategory::create([
+            'name'=>$request->name,
+            'category_id'=>$request->category_id,
+        ]);
+        return redirect()->back()->with(
+            'success',"$request->name subcategory added successfully"
+        );
+
     }
 
     /**
@@ -98,8 +112,10 @@ class SubCategoryController extends Controller
      * @param  \App\SubCategory  $subCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SubCategory $subCategory)
+    public function destroy($subCategory)
     {
-        //
+        $sub = SubCategory::find($subCategory);
+        $sub->delete();
+        return redirect()->back()->with(['success'=>"$sub->name SubCategory Deleted Successfully"]);
     }
 }
