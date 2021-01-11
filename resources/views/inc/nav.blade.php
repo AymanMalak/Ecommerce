@@ -11,15 +11,14 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                        <a class="pr-2" href="{{url('product')}}">All Products</a>
-
-                        @auth
+                    @auth
+                        <ul class="navbar-nav mr-auto">
+                            <a class="pr-2" href="{{url('product')}}">All Products</a>
                             <a class="pr-2" href="{{route('product.create')}}">Add New Product</a>
                             <a class="pr-2" href="{{route('category.create')}}">Add New Category</a>
                             <a class="pr-2" href="{{route('subcategory.create')}}">Add New SubCategory</a>
-                        @endauth
-                    </ul>
+                        </ul>
+                    @endauth
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

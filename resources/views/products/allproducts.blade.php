@@ -31,7 +31,15 @@
                                 @endif
                                 <td class="font-weight-bold text-muted"> <?=  Str::substr($p->description,1 ,30)." ..." ?></td>
                                 @auth
-                                    <td> <a href="{{url('product',$p->id)}}" class="btn btn-info">Show</a> <a href="{{route('product.edit',$p->id)}}" class="btn btn-secondary">Edit</a> <a href="{{route('product.destroy',$p->id)}}" class="btn btn-danger">Delete</a> </td>
+                                    <td class="row"> 
+                                        <a href="{{url('product',$p->id)}}" class="btn btn-info mx-1">Show</a> 
+                                        <a href="{{route('product.edit',$p->id)}}" class="btn  mx-1 btn-secondary">Edit</a> 
+                                        <form action="{{route('product.destroy',$p->id)}}" method="POST" >
+                                            @method("DELETE")
+                                            @csrf
+                                            <input href="{{route('product.destroy',$p->id)}}" type="submit" class="btn  mx-1 btn-danger" value="Delete"> 
+                                        </form>
+                                    </td>
                                 @endauth
                             </tr>
                         @empty

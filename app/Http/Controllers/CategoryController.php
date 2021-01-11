@@ -1,17 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
 
-    public function index()
+    public function __construct()
     {
-        
+        $this->middleware('auth');
     }
+
+    public function index(){}
 
     public function create()
     {
@@ -26,24 +27,21 @@ class CategoryController extends Controller
         Category::create([
             'name'=>$request->name,
         ]);
+
         return redirect()->back()->with([
             'success'=>"$request->name Category Is Added Successfully",
             'categories'=>$categories,    
         ]);
     }
 
-    public function show(SubCategory $subCategory)
-    {
+    public function show($id){}
 
-    }
-
-    public function edit($subCategory)
+    public function edit($id)
     {
         $category = Category::findOrFail($subCategory);
         $categories = Category::get();
         return view('categories.edit',compact(['category','categories']));
     }
-
 
     public function update(Request $request, $subCategory)
     {
@@ -51,10 +49,8 @@ class CategoryController extends Controller
         $category->update([
             'name'=> $request->name,
         ]);
-        return redirect()->back()->with(['success'=>'Category updated successfully']);
-
+        return redirect()->back()->with(['success'=>"$category->name updated successfully"]);
     }
-
 
     public function destroy($id)
     {
@@ -66,4 +62,5 @@ class CategoryController extends Controller
 
         return back()->with(['success'=>"$category->name Category Deleted Successfully"]);
     }
+    
 }

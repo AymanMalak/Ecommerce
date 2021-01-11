@@ -6,12 +6,19 @@
     @include('inc.errors')
     @include('inc.messages')
 
-    <form action="{{url('product/update',$product->id)}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
+        @method('PUT')
         @csrf
         <div class="form-group">
             <label class="font-weight-bold" for="name">Name</label>
             <input type="text" name="name" class="form-control" id="name" value="{{$product->name}}" placeholder="Enter Name">
         </div>
+
+        <div class="form-group">
+            <label class="font-weight-bold" for="price">Quantity</label>
+            <input type="text" name="quantity" class="form-control" id="price" value="{{$product->quantity}}"  placeholder="Enter Quantity">
+        </div>
+
 
        <div class="form-group">
             <label class="font-weight-bold" for="price">Price</label>

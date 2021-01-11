@@ -15,6 +15,11 @@ class ProductController extends Controller
 
     use ProductTrait;
 
+    public function __construct()
+    {
+        $this->middleware('auth')->except('products');
+    }
+    // table
     public function index()
     {
         $products= Product::with('category')->paginate(7);
@@ -25,11 +30,23 @@ class ProductController extends Controller
         return view('products.allproducts',compact(['products']));
     }
 
+    // card
+    public function products()
+    {
+
+        $products= Product::get();
+        if(!$products)
+            return redirect()->back()->with(['error'=>'There is no products']);
+
+        return view('products',compact(['products']));
+    }
+
     public function create()
     {
         $categories = Category::get();
         if(!$categories)
             return view('products.create');
+
         return view('products.create',compact('categories'));
     }
 
@@ -77,39 +94,40 @@ class ProductController extends Controller
 
     public function update(EditProductRequest $request, $id)
     {
-                // validation and messages errors in request ProductRequest
+        // validation and messages errors in request ProductRequest
 
-                $product = Product::findOrFail($id);
-                $image = $request->img;
-                $oldImage= $product->img;
+        $product = Product::findOrFail($id);
+        $image = $request->img;
+        $oldImage= $product->img;
 
-                if($request->hasFile('img')){
-                    // delete the old
-                    if(($image) !== null){
-                        unlink( public_path("images/$oldImage") );
-                    }
+        if($request->hasFile('img')){
+            // delete the old
+            if(($image) !== null){
+                unlink( public_path("images/$oldImage") );
+            }
 
-                    $img_name = $this->saveImage( $request->img );
+            $img_name = $this->saveImage( $request->img );
 
-                    // dd($extention);
-                    $product->update([
-                        'name'=> $request->name,
-                        'price'=> $request->price,
-                        'img'=> $img_name,
-                        'description'=> $request->description,
-                        'category_id'=> $request->category_id,
-                    ]);
-                }
+            // dd($extention);
+            $product->update([
+                'name'=> $request->name,
+                'price'=> $request->price,
+                'quantity'=> $request->quantity,
+                'img'=> $img_name,
+                'description'=> $request->description,
+                'category_id'=> $request->category_id,
+            ]);
+        }
 
-                $product->update([
-                    'name'=> $request->name,
-                    'price'=> $request->price,
-                    'quantity'=> $request->quantity,
-                    'description'=> $request->description,
-                    'category_id'=> $request->category_id,
-                ]);
+        $product->update([
+            'name'=> $request->name,
+            'price'=> $request->price,
+            'quantity'=> $request->quantity,
+            'description'=> $request->description,
+            'category_id'=> $request->category_id,
+        ]);
 
-                return redirect()->back()->with(['success'=>'the product updated successfully']);
+        return redirect()->back()->with(['success'=>"$product->name updated successfully"]);
     }
 
     public function destroy($id)

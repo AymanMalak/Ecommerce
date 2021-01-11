@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2020 at 12:24 AM
+-- Generation Time: Jan 09, 2021 at 02:28 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -39,12 +39,10 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(2, 'LAPTOP', NULL, NULL),
-(3, 'MOBILE', NULL, NULL),
-(7, 'TABLET', '2020-12-18 09:44:58', '2020-12-18 09:44:58'),
-(8, 'PC', '2020-12-18 09:45:27', '2020-12-18 09:45:27'),
-(10, 'Monitors', '2020-12-18 13:04:16', '2020-12-18 13:13:07'),
-(11, 'Watchs', '2020-12-18 13:04:20', '2020-12-18 13:13:30');
+(1, 'PC', '2021-01-06 07:00:16', '2021-01-06 07:00:16'),
+(2, 'lAPTOP', '2021-01-06 07:00:30', '2021-01-06 07:00:30'),
+(3, 'TABLET', '2021-01-06 07:00:36', '2021-01-06 07:00:36'),
+(4, 'MOBILE', '2021-01-06 07:00:44', '2021-01-06 07:00:44');
 
 -- --------------------------------------------------------
 
@@ -121,7 +119,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `price`, `quantity`, `description`, `img`, `status`, `category_id`, `created_at`, `updated_at`) VALUES
-(1, 'ayman', 555.00, NULL, 'adasdasd', 'product_5fdc9698eb9fc.jpg', NULL, 2, '2020-12-18 09:46:32', '2020-12-18 09:46:32');
+(2, 'Iphone 11 Pro', 14000.00, 3, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'product_5ff95eae2f03f.jpg', NULL, 4, '2021-01-09 05:43:42', '2021-01-09 05:43:42');
 
 -- --------------------------------------------------------
 
@@ -143,10 +141,15 @@ CREATE TABLE `subcategories` (
 --
 
 INSERT INTO `subcategories` (`id`, `name`, `quantity`, `category_id`, `created_at`, `updated_at`) VALUES
-(1, 'iphone7', NULL, 3, NULL, NULL),
-(2, 'hp350 g1', NULL, 2, NULL, NULL),
-(3, 'samsung', NULL, 3, NULL, NULL),
-(4, 'redmi6', NULL, 3, NULL, NULL);
+(1, 'Iphone', NULL, 4, '2021-01-06 07:00:58', '2021-01-06 07:00:58'),
+(2, 'Xiaomi', NULL, 4, '2021-01-06 07:01:25', '2021-01-06 07:01:25'),
+(3, 'HP', NULL, 2, '2021-01-06 07:01:37', '2021-01-06 07:01:37'),
+(4, 'Dell', NULL, 2, '2021-01-06 07:01:55', '2021-01-06 07:01:55'),
+(5, 'Fujitsu', NULL, 1, '2021-01-06 07:02:37', '2021-01-06 07:02:37'),
+(6, 'Vivo', NULL, 3, '2021-01-06 07:02:49', '2021-01-06 07:02:49'),
+(7, 'Samsung', NULL, 4, '2021-01-06 07:03:21', '2021-01-06 07:03:21'),
+(8, 'Lenovo', NULL, 2, '2021-01-06 07:03:39', '2021-01-06 07:03:39'),
+(9, 'Oppo', NULL, 4, '2021-01-06 07:03:50', '2021-01-06 07:03:50');
 
 -- --------------------------------------------------------
 
@@ -204,7 +207,8 @@ ALTER TABLE `password_resets`
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `category_id` (`category_id`);
 
 --
 -- Indexes for table `subcategories`
@@ -228,7 +232,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -246,13 +250,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `subcategories`
 --
 ALTER TABLE `subcategories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -263,6 +267,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `subcategories`
