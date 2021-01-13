@@ -75,9 +75,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $product =Product::findOrFail($id);
-
         $category = Category::find($product->category_id);
-
         $count = Product::where('category_id','=',$product->category_id)->count();
 
         return view('products/show',compact(['product','category','count']));

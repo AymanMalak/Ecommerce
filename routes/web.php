@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Symfony\Component\Console\Input\Input;
-
+use Illuminate\Foundation\Application;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +19,6 @@ use Symfony\Component\Console\Input\Input;
 
 
 // ------------------------------------------------------------------------
-
 
 // ------------------------------------------------------------------------
 Route::group(
@@ -36,17 +35,31 @@ Route::group(
         // ------------------------------------------------------------------------
         // select all products
         Route::get('/', 'ProductController@products')->name('product.products');
-        
         // ------------------------------------------------------------------------
-
-    });
-
+        $subjects = [
+            'product', 'category', 'subcategory'
+        ];
+        
+        foreach ($subjects as $subject) {
+            Route::prefix($subject)->group(function () {
+                Route::get('/{any}', function($any){
+                    // return redirect('/');
+                    return view('NotFound');
+                })->where('any', '.*');
+            });
+        }
+});
 
 // ajax
 Route::get('/ajax-subcat','SubCategoryController@ajax');
 
 // ------------------------------------------------------------------------
 
-Route::get('/NotFound', function(){
+// Route::get('/NotFound', function(){
+//     return view('NotFound');
+// });
+
+Route::get('/{any}', function($any){
+    // redirect('/NotFound');
     return view('NotFound');
-});
+})->where('any', '.*');
