@@ -50,11 +50,29 @@ class SubCategoryController extends Controller
         );
     }
 
+    public function edit($subCategory)
+    {
+        $subcategories = SubCategory::get();
+        $subcategory = SubCategory::findOrFail($subCategory);
+        return view('subcategories.edit',compact(['subcategory','subcategories']));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // dd($request->name);
+        $subCat = SubCategory::findOrFail($id);
+        // dd($subCat);
+        $subCat->update([
+            'name'=> $request->name,
+        ]);
+        return redirect()->back()->with(['success'=>"$subCat->name updated successfully"]);
+    }
+
     public function destroy($subCategory)
     {
         $sub = SubCategory::find($subCategory);
         $sub->delete();
         return redirect()->back()->with(['success'=>"$sub->name SubCategory Deleted Successfully"]);
     }
-    
+
 }

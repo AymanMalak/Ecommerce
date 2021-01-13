@@ -30,13 +30,13 @@ class CategoryController extends Controller
 
         return redirect()->back()->with([
             'success'=>"$request->name Category Is Added Successfully",
-            'categories'=>$categories,    
+            'categories'=>$categories,
         ]);
     }
 
     public function show($id){}
 
-    public function edit($id)
+    public function edit($subCategory)
     {
         $category = Category::findOrFail($subCategory);
         $categories = Category::get();
@@ -62,5 +62,5 @@ class CategoryController extends Controller
 
         return back()->with(['success'=>"$category->name Category Deleted Successfully"]);
     }
-    
+
 }

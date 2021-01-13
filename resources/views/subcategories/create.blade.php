@@ -29,7 +29,7 @@
     </form>
 
     <h1 class="text-center text-info mt-2">All SubCategories</h1>
-    
+
     <div class="horscrol">
         <div class="horscroldiv">
             <table class="table my-3">
@@ -50,11 +50,12 @@
                             <td class="font-weight-bold ">{{$p->name}}</td>
                             <td class="font-weight-bold text-secondary">{{$p->category->name}}</td>
                             @auth
-                                <td>  
+                                <td class="row">
+                                    <a href="{{route('subcategory.edit',$p->id)}}"  class="btn btn-info mx-1">Edit</a>
                                     <form action="{{route('subcategory.destroy',$p->id)}}" method="POST" >
                                         @method("DELETE")
                                         @csrf
-                                        <input href="{{route('subcategory.destroy',$p->id)}}" type="submit" class="btn btn-danger" value="Delete"> 
+                                        <input href="{{route('subcategory.destroy',$p->id)}}" type="submit" class="btn btn-danger mx-1" value="Delete">
                                     </form>
                                 </td>
                             @endauth
