@@ -7,14 +7,14 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="">#</th>
-                            <th scope="">Name</th>
-                            <th scope="">Category</th>
-                            <th scope="">Price</th>
-                            <th scope="">Quantity</th>
-                            <th scope="">Image</th>
-                            <th scope="">Description</th>
+                            <th scope="">{{__('messages.Name')}}</th>
+                            <th scope="">{{__('messages.Category')}}</th>
+                            <th scope="">{{__('messages.Price')}}</th>
+                            <th scope="">{{__('messages.Quantity')}}</th>
+                            <th scope="">{{__('messages.Image')}}</th>
+                            <th scope="">{{__('messages.Description')}}</th>
                             @auth
-                            <th scope="">Operations</th>
+                            <th scope="">{{__('messages.Operations')}}</th>
                             @endauth
                         </tr>
                     </thead>
@@ -32,19 +32,19 @@
                                 <td class="font-weight-bold text-muted"> <?=  Str::substr($p->description,1 ,30)." ..." ?></td>
                                 @auth
                                     <td class="row"> 
-                                        <a href="{{url('product',$p->id)}}" class="btn btn-info mx-1">Show</a> 
-                                        <a href="{{route('product.edit',$p->id)}}" class="btn  mx-1 btn-secondary">Edit</a> 
+                                        <a href="{{url('product',$p->id)}}" class="btn btn-info mx-1">{{__('messages.Show')}}</a> 
+                                        <a href="{{route('product.edit',$p->id)}}" class="btn  mx-1 btn-secondary">{{__('messages.Edit')}}</a> 
                                         <form action="{{route('product.destroy',$p->id)}}" method="POST" >
                                             @method("DELETE")
                                             @csrf
-                                            <input href="{{route('product.destroy',$p->id)}}" type="submit" class="btn  mx-1 btn-danger" value="Delete"> 
+                                            <input href="{{route('product.destroy',$p->id)}}" type="submit" class="btn  mx-1 btn-danger" value="{{__('messages.Delete')}}"> 
                                         </form>
                                     </td>
                                 @endauth
                             </tr>
                         @empty
                             <div class="alert alert-danger text-center font-weight-bold">
-                                There is no products
+                                {{__('messages.There is no products')}}
                             </div>
                         @endforelse
                     </tbody>

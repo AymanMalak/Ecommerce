@@ -14,17 +14,17 @@
                                 <p class="card-text text-muted">  <?=  Str::substr($p->description,1 ,30)." ..." ?></p>
 
                                 @guest
-                                    <a href="{{url('product',$p->id)}}" class="btn btn-info form-control" >Show</a> 
+                                    <a href="{{url('product',$p->id)}}" class="btn btn-info form-control" >{{__('messages.Show')}}</a> 
                                 @endguest
 
                                 @auth
                                     <div class="row mx-auto"> 
-                                            <a href="{{url('product',$p->id)}}" class="btn btn-info mx-1">Show</a> 
-                                            <a href="{{route('product.edit',$p->id)}}" class="btn  mx-1 btn-secondary">Edit</a> 
+                                            <a href="{{url('product',$p->id)}}" class="btn btn-info mx-1"> {{__('messages.Show')}} </a> 
+                                            <a href="{{route('product.edit',$p->id)}}" class="btn  mx-1 btn-secondary">{{__('messages.Edit')}}</a> 
                                             <form action="{{route('product.destroy',$p->id)}}" method="POST" >
                                                 @method("DELETE")
                                                 @csrf
-                                                <input href="{{route('product.destroy',$p->id)}}" type="submit" class="btn  mx-1 btn-danger" value="Delete"> 
+                                                <input type="submit" class="btn  mx-1 btn-danger" value="{{__('messages.Delete')}}"> 
                                             </form>
                                     </div>
                                 @endauth

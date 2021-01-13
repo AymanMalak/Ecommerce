@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="text-center text-primary">Edit Category</h1>
+    <h1 class="text-center text-primary">{{__('messages.Edit Category')}}</h1>
 
     @include('inc.errors')
     @include('inc.messages')
@@ -10,11 +10,11 @@
         @csrf
         @method('PUT')
         <div class="form-group">
-            <label class="font-weight-bold" for="name">Name</label>
-            <input type="text" name="name" class="form-control" id="name" value="{{$category->name}}" placeholder="Category Name">
+            <label class="font-weight-bold" for="name">{{__('messages.Name')}}</label>
+            <input type="text" name="name" class="form-control" id="name" value="{{$category->name}}" placeholder="{{__('messages.Category Name')}}">
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">{{__('messages.Submit')}}</button>
     </form>
 
     <br>

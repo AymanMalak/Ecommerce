@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\SubCategory;
 use App\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\SubCategoryRequest\SubCategoryRequest;
 
 class SubCategoryController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','verified']);
     }
 
     public function index()
@@ -39,7 +40,7 @@ class SubCategoryController extends Controller
         return view('subcategories.create',compact(['subcategories','categories']));
     }
 
-    public function store(Request $request)
+    public function store(SubCategoryRequest $request)
     {
         SubCategory::create([
             'name'=>$request->name,
@@ -57,7 +58,7 @@ class SubCategoryController extends Controller
         return view('subcategories.edit',compact(['subcategory','subcategories']));
     }
 
-    public function update(Request $request, $id)
+    public function update(SubCategoryRequest $request, $id)
     {
         // dd($request->name);
         $subCat = SubCategory::findOrFail($id);

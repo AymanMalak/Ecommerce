@@ -1,0 +1,131 @@
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Messages Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are the default lines which match reasons
+    | that are given by the password broker for a password update attempt
+    | has failed, such as for an invalid token or invalid new password.
+    |
+    */
+
+    // -------------------------------------
+    'Electronic shop' =>  'متجر الالكترونيات',
+    'Login' =>  'تسجيل الدخول',
+    'Register' =>  'تسجيل',
+    'Logout' =>  'تسجيل الخروج',
+    'E-Mail Address' =>  'البريد الالكتروني',
+    'Password' =>  'كلمة السر',
+    'Confirm Password' =>  'تأكيد كلمة السر',
+    'Remember Me' =>  'تذكرني',
+    'Forgot Your Password?' =>  'هل نسيت كلمة السر؟',
+    'Reset Password' =>  'إعادة تعيين كلمة المرور',
+    'Send Password Reset Link' =>  'إرسال رابط إعادة تعيين كلمة السر',
+    'You are logged in!' =>  'لقد سجلت الدخول!',
+    'Verify Your Email Address' => 'تحقق من عنوان بريدك الإلكتروني',
+    'A fresh verification link has been sent to your email address.' => 'تم إرسال رابط تحقق جديد إلى عنوان بريدك الإلكتروني.',
+    'Before proceeding, please check your email for a verification link.' => 'قبل المتابعة ، يرجى التحقق من بريدك الإلكتروني للحصول على رابط التحقق.',
+    'If you did not receive the email' => 'إذا لم تستلم البريد الإلكتروني',
+    'click here to request another' => 'انقر هنا لطلب آخر',
+    // -------------------------------------
+    'Dashboard' => 'لوحة القيادة',
+    'All Products' =>  'جميع المنتجات',
+    'All Categories' =>  'جميع الفئات',
+    'All SubCategories' =>  'جميع الفئات الفرعية',
+    'Add New Product' =>  'اضافة منتج جديد',
+    'Add New Category' =>  'إضافة فئة جديدة',
+    'Add New SubCategory' =>  'إضافة تصنيف فرعي جديد',
+    'Edit Product' =>  'تعديل المنتج',
+    'Edit Category' =>  'تعديل الفئة',
+    'Edit SubCategory' =>  'تعديل الفئة الفرعية',
+    // -------------------------------------
+    'Show' =>  'عرض',
+    'Edit' =>  'تعديل',
+    'Delete' =>  'حذف',
+    // -------------------------------------
+    'Name' =>  'اسم',
+    'Category' =>  'الفئة',
+    'Price' =>  'السعر',
+    'Quantity' =>  'كمية',
+    'Image' =>  'صورة',
+    'Description' =>  'وصف',
+    'Operations' =>  'عمليات',
+    'Image is not exists' =>  'الصورة غير موجودة',
+    // -------------------------------------
+    'There is' =>  'يوجد',
+    'Pieces' =>  'قطع',
+    'LE' =>  'جنيه',
+    // -------------------------------------
+    'Enter Name' =>  'أدخل الاسم',
+    'Enter Price' =>  'أدخل السعر',
+    'Enter Quantity' =>  'أدخل الكمية',
+    'Categories' =>  'التصنيفات',
+    'SubCategories' =>  'الفئات الفرعية',
+    'Submit' =>  'إرسال',
+    'Product Name' =>  'اسم المنتج',
+    'Category Name' =>  'اسم الفئة',
+    'SubCategory Name' =>  'اسم التصنيف الفرعي',
+    // -------------------------------------
+    'There is no Categories' =>  'لا توجد فئات',
+    'There is no SubCategories' =>  'لا توجد فئات فرعية',
+    'There is no products' =>  'لا يوجد منتجات',
+    'Options' =>  'خيارات',
+    // -------------------------------------
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+    '' =>  '',
+
+];

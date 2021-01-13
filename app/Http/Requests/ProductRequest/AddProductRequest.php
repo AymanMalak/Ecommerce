@@ -26,10 +26,10 @@ class AddProductRequest extends FormRequest
     public function messages()
     {
         return [
-                "name.required" =>  __("name is required"),
-                "img.required" => __("img is required"),
-                "description.required" =>  __("description is required"),
-                "price.required" => __("price is required"),
+                // "name.required" =>  __("validation.Name is required"),
+                // "img.required" => __("validation.Image is required"),
+                // "description.required" =>  __("validation.Description is required"),
+                // "price.required" => __("validation.Price is required"),
         ];
     }
 }

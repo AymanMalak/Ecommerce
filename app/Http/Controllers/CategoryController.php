@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest\CategoryRequest;
 
 class CategoryController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','verified']);
     }
 
     public function index(){}
@@ -20,7 +21,7 @@ class CategoryController extends Controller
         return view('categories.create',compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         $categories = Category::get();
 
@@ -43,7 +44,7 @@ class CategoryController extends Controller
         return view('categories.edit',compact(['category','categories']));
     }
 
-    public function update(Request $request, $subCategory)
+    public function update(CategoryRequest $request, $subCategory)
     {
         $category = Category::findOrFail($subCategory);
         $category->update([

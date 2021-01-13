@@ -2,7 +2,8 @@
             <div class="container">
 
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{-- {{ config('app.name', 'Laravel') }} --}}
+                    {{__('messages.Electronic shop')}}
                 </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -13,23 +14,34 @@
                     <!-- Left Side Of Navbar -->
                     @auth
                         <ul class="navbar-nav mr-auto">
-                            <a class="pr-2" href="{{url('product')}}">All Products</a>
-                            <a class="pr-2" href="{{route('product.create')}}">Add New Product</a>
-                            <a class="pr-2" href="{{route('category.create')}}">Add New Category</a>
-                            <a class="pr-2" href="{{route('subcategory.create')}}">Add New SubCategory</a>
+                            <a class="pr-2" href="{{url('product')}}">{{__('messages.All Products')}}</a>
+                            <a class="pr-2" href="{{route('product.create')}}">{{__('messages.Add New Product')}}</a>
+                            <a class="pr-2" href="{{route('category.create')}}">{{__('messages.Add New Category')}}</a>
+                            <a class="pr-2" href="{{route('subcategory.create')}}">{{__('messages.Add New SubCategory')}}</a>
                         </ul>
                     @endauth
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                           <li class="nav-item">
+                                <a class="nav-link" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">{{ $properties['native'] }}</a>
+                            </li>
+                            {{-- <li>
+                                <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                    {{ $properties['native'] }}
+                                </a>
+                            </li> --}}
+                        @endforeach
+
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('messages.Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('messages.Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -42,7 +54,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('messages.Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -51,6 +63,7 @@
                                 </div>
                             </li>
                         @endguest
+
                     </ul>
                 </div>
             </div>

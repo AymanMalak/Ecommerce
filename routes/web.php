@@ -3,6 +3,7 @@
 // use Facade\FlareClient\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Symfony\Component\Console\Input\Input;
 
 /*
@@ -17,22 +18,29 @@ use Symfony\Component\Console\Input\Input;
 */
 
 
-Auth::routes(['verify'=>true]);
 // ------------------------------------------------------------------------
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
 // ------------------------------------------------------------------------
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){ //...
+        
+        Auth::routes(['verify'=>true]);
+        Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+        Route::resource('product','ProductController');
+        Route::resource('category','CategoryController');
+        Route::resource('subcategory','SubCategoryController');
+        // ------------------------------------------------------------------------
+        // select all products
+        Route::get('/', 'ProductController@products')->name('product.products');
+        
+        // ------------------------------------------------------------------------
 
-Route::resource('product','ProductController');
-Route::resource('category','CategoryController');
-Route::resource('subcategory','SubCategoryController');
+    });
 
-// ------------------------------------------------------------------------
-// select all products
-Route::get('/', 'ProductController@products')->name('product.products');
-
-// ------------------------------------------------------------------------
 
 // ajax
 Route::get('/ajax-subcat','SubCategoryController@ajax');
