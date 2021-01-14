@@ -1,0 +1,17 @@
+*{
+    direction: rtl !important;
+}
+label ,button{
+
+    direction: rtl !important;
+    float:right !important;
+    
+}
+
+.card-body{
+    text-align:right !important;
+    display:flex;
+    flex-direction: column;
+    justify-content:end;
+    float:right !important;
+}

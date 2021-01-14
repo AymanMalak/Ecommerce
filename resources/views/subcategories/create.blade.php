@@ -11,8 +11,8 @@
         @method('POST')
 
         <div class="form-group">
-            <label class="font-weight-bold" for="name_en">{{__('messages.SubCategory Name')}}</label>
-            <input type="text" name="name_en" class="form-control" id="name_en"  placeholder="{{__('messages.SubCategory Name')}}">
+            <label class="font-weight-bold" for="name_en">{{__('messages.SubCategory Name en')}}</label>
+            <input type="text" name="name_en" class="form-control" id="name_en"  placeholder="{{__('messages.SubCategory Name en')}}">
         </div>
 
         <div class="form-group">
@@ -41,21 +41,27 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">{{__('messages.SubCategory Name')}}</th>
+                                @if (LaravelLocalization::getCurrentLocale() == 'ar')
+                                
+                        <th scope="col" class="text-center" >{{__('messages.SubCategory Name ar')}}</th>
+                                @else
+                        <th scope="col" class="text-center">{{__('messages.SubCategory Name en')}}</th>
+                                
+                                @endif
                         @auth
-                        <th scope="col">{{__('messages.Operations')}}</th>
+                        <th scope="col" class="text-center">{{__('messages.Operations')}}</th>
                         @endauth
                     </tr>
                 </thead>
                 <tbody>
- 
+
                     @forelse ($subcategories as $p)
 
                         <tr>
                             <th scope="row">{{$p->id}}</th>
-                            <td class="font-weight-bold ">{{$p->name}}</td>
+                            <td class="font-weight-bold text-center">{{$p->name}}</td>
                             @auth
-                                <td class="row">
+                                <td class="d-flex justify-content-center">
                                     <a href="{{route('subcategory.edit',$p->id)}}"  class="btn btn-info mx-1">{{__('messages.Edit')}}</a>
                                     <form action="{{route('subcategory.destroy',$p->id)}}" method="POST" >
                                         @method("DELETE")

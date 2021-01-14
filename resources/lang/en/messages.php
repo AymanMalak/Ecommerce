@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Messages 
+    | Messages
     |--------------------------------------------------------------------------
     |
     | The following language lines are the default lines which match reasons
@@ -65,22 +65,22 @@ return [
     'Enter Quantity' =>  'Enter Quantity',
     'Categories' =>  'Categories',
     'SubCategories' =>  'SubCategories',
-    'Description' =>  'Description',
     'Submit' =>  'Submit',
     'Operations' =>  'Operations',
-    'Product Name' =>  'Product Name',
-    'Category Name' =>  'Category Name',
-    'SubCategory Name' =>  'SubCategory Name',
+    'Product Name en' =>  'Product English Name',
+    'Product Name ar' =>  'Product Arabic Name',
+    'Category Name en' =>  'Category English Name',
+    'Category Name ar' =>  'Category Arabic Name',
+    'SubCategory Name en' =>  'SubCategory English Name',
+    'SubCategory Name ar' =>  'SubCategory Arabic Name',
+    'Description en' =>  'English Description',
+    'Description ar' =>  'Arabic Description',
     // -------------------------------------
     'There is no Categories' =>  'There is no Categories',
     'There is no SubCategories' =>  'There is no SubCategories',
     'There is no products' =>  'There is no products',
     'Options' =>  'Options',
     // -------------------------------------
-    'SubCategory Name ar' =>  'SubCategory Arabic Name ',
-    'Category Name ar' =>  'Category Arabic Name',
-    '' =>  '',
-    '' =>  '',
     '' =>  '',
     '' =>  '',
     '' =>  '',

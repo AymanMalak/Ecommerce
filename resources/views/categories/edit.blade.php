@@ -11,8 +11,8 @@
         @method('PUT')
 
         <div class="form-group">
-            <label class="font-weight-bold" for="name_en">{{__('messages.Category Name')}}</label>
-            <input type="text" name="name_en" class="form-control" id="name_en"  value="{{$category->name_en}}" placeholder="{{__('messages.Category Name')}}">
+            <label class="font-weight-bold" for="name_en">{{__('messages.Category Name en')}}</label>
+            <input type="text" name="name_en" class="form-control" id="name_en"  value="{{$category->name_en}}" placeholder="{{__('messages.Category Name en')}}">
         </div>
         <div class="form-group">
             <label class="font-weight-bold" for="name_ar">{{__('messages.Category Name ar')}}</label>

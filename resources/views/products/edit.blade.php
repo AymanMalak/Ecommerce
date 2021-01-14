@@ -15,8 +15,8 @@
         </div>
 
         <div class="form-group">
-            <label class="font-weight-bold" for="price">{{__('messages.Quantity')}}</label>
-            <input type="text" name="quantity" class="form-control" id="price" value="{{$product->quantity}}"  placeholder="{{__('messages.Enter Quantity')}}">
+            <label class="font-weight-bold" for="quantity">{{__('messages.Quantity')}}</label>
+            <input type="text" name="quantity" class="form-control" id="quantity" value="{{$product->quantity}}"  placeholder="{{__('messages.Enter Quantity')}}">
         </div>
 
 
@@ -45,8 +45,8 @@
         </div>
 
         <div class="form-group">
-            <label class="font-weight-bold" for="exampleFormControlTextarea1">{{__('messages.Description')}}</label>
-            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5">{{$product->description}}</textarea>
+            <label class="font-weight-bold" for="exampleFormControlTextarea1">{{__('messages.Description en')}}</label>
+            <textarea class="form-control" name="description_en" id="exampleFormControlTextarea1" rows="5">{{$product->description}}</textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">{{__('messages.Submit')}}</button>

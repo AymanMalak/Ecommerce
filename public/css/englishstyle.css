@@ -1,0 +1,8 @@
+*{
+    direction: ltr !important;
+}
+label , button{
+
+    direction: ltr !important;
+    float:left !important;
+}

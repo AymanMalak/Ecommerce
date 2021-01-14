@@ -10,8 +10,12 @@
 
         @csrf
         <div class="form-group">
-            <label class="font-weight-bold" for="name">{{__('messages.Product Name')}}</label>
-            <input type="text" name="name" class="form-control" id="name"  placeholder="{{__('messages.Enter Name')}}">
+            <label class="font-weight-bold" for="name_en">{{__('messages.Product Name en')}}</label>
+            <input type="text" name="name_en" class="form-control" id="name_en"  placeholder="{{__('messages.Product Name en')}}">
+        </div>
+        <div class="form-group">
+            <label class="font-weight-bold" for="name_ar">{{__('messages.Product Name ar')}}</label>
+            <input type="text" name="name_ar" class="form-control" id="name_ar"  placeholder="{{__('messages.Product Name ar')}}">
         </div>
 
        <div class="form-group">
@@ -50,34 +54,22 @@
         {{-- ------------------------------------------ --}}
 
         <div class="form-group">
-            <label class="font-weight-bold" for="exampleFormControlTextarea1">{{__('messages.Description')}}</label>
+            <label class="font-weight-bold" for="exampleFormControlTextarea1">{{__('messages.Description en')}}</label>
             <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label class="font-weight-bold" for="exampleFormControlTextarea2">{{__('messages.Description ar')}}</label>
+            <textarea class="form-control" name="description" id="exampleFormControlTextarea2" rows="5"></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">{{__('messages.Submit')}}</button>
     </form>
 
 @endsection
-@section('scripts')
-    <script>
-        // console.log('ssssssssssssssssssssssssss');
-        $(document).ready(function () {
-            // $.get('/ajax-subcat?cat_id='+ cat_id,function(data){});
-                $('#categories').on('change',function(e){
-                    // console.log(e);
-                    var cat_id = e.target.value;
-                    console.log(cat_id);
-                    //ajax
-                    $.get('/ajax-subcat?cat_id='+ cat_id,function(data){
-                        //success data
-                    console.log(data);
-                        $('#subcategory').empty();
-                    $.each(data,function(index,subcatObj){
-                        // var option = $('<option/>', {id:create, value:subcatObj});
-                        $('#subcategory').append('<option class="" style="font-size:16px" value="'+subcatObj.value+'">'+subcatObj.name+'</option>');
-                    });
-                });
-            });
-        });
-    </script>
-@endsection
+
+
+
+@include('inc.ajax')
+
+

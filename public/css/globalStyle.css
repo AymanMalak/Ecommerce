@@ -1,16 +1,16 @@
+
 @media only screen and (max-width: 600px) {
+    .horscrol {
+        overflow-x: auto !important;
+        overflow-y:hidden  !important;
+    }
+    .horscroldiv{
+        position:relative  !important;
+        min-width:max-content  !important;
+        padding-bottom:15px  !important;
+    }
+}
 
-
-.horscrol {
-    overflow-x: auto !important;
-    overflow-y:hidden  !important;
-}
-.horscroldiv{
-    position:relative  !important;
-    min-width:max-content  !important;
-    padding-bottom:15px  !important;
-}
-}
 ul{
     list-style-type: none;
 }

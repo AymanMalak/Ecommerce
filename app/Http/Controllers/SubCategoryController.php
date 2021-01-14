@@ -29,6 +29,7 @@ class SubCategoryController extends Controller
             $cat_id = $request->cat_id;
             $subcategories = Subcategory::where('category_id','=',$cat_id)->get();
             return Response()->json($subcategories);
+            dd($subcategories);
 
     }
 
@@ -40,8 +41,13 @@ class SubCategoryController extends Controller
             'category_id',
             'name_'. LaravelLocalization::getCurrentLocale(). ' as name'
             )->get();
+
         // $subcategory = SubCategory::findOrFail($subCategory);
-        $categories = Category::get();
+        // $categories = Category::get();
+        $categories = Category::select(
+            'id',
+            'name_'. LaravelLocalization::getCurrentLocale(). ' as name'
+            )->get();
         // dd($subcategories);
         return view('subcategories.create',compact(['categories','subcategories']));
     }

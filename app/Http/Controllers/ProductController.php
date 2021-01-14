@@ -9,7 +9,7 @@ use App\Product;
 use App\Category;
 use App\Traits\ProductTrait;
 use Illuminate\Support\Facades\Validator;
-
+use LaravelLocalization;
 class ProductController extends Controller
 {
 
@@ -22,7 +22,9 @@ class ProductController extends Controller
     // table
     public function index()
     {
-        $products= Product::with('category')->paginate(7);
+
+        $products= Product::with('category')->get();
+        // $products= Product::get();
 
         if(!$products)
             return redirect()->back()->with(['error'=>'There is no products']);
@@ -43,7 +45,10 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = Category::get();
+        $categories = Category::select(
+            'id',
+            'name_'. LaravelLocalization::getCurrentLocale(). ' as name'
+            )->get();
         if(!$categories)
             return view('products.create');
 
@@ -76,6 +81,13 @@ class ProductController extends Controller
     {
         $product =Product::findOrFail($id);
         $category = Category::find($product->category_id);
+        // ---------
+        // $category = Category::select(
+        //     'id',
+        //     'name_'. LaravelLocalization::getCurrentLocale(). ' as name'
+        //     )->where('id',$product->category_id)->first();
+        // dd($category);
+        // ---------
         $count = Product::where('category_id','=',$product->category_id)->count();
 
         return view('products/show',compact(['product','category','count']));
@@ -83,8 +95,17 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
-
+        $product = Product::select(
+            // 'id',
+            'price',
+            'quantity',
+            'img',
+            'category_id',
+            'name_'. LaravelLocalization::getCurrentLocale(). ' as name',
+            'description_'. LaravelLocalization::getCurrentLocale(). ' as description',
+            )->where('id',$id)->get();
+        // $product = Product::findOrFail($id);
+        // dd($product);
         $categories = Category::get();
 
         return view('products.edit',compact(['product','categories']));
