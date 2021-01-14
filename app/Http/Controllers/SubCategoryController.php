@@ -6,6 +6,7 @@ use App\SubCategory;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\SubCategoryRequest\SubCategoryRequest;
+use LaravelLocalization;
 
 class SubCategoryController extends Controller
 {
@@ -16,13 +17,11 @@ class SubCategoryController extends Controller
 
     public function index()
     {
-        // $categories = Category::find(3);
-        $categories= Category::where('id',3)->get();
-
-        $subcategories= SubCategory::where('category_id',3)->get();
-
-        // return $categories;
-        return view('categories.create',compact(['subcategories','categories']));
+        $subcategories = SubCategory::select(
+            'id',
+            'name_'. LaravelLocalization::getCurrentLocale(). ' as name'
+            )->get();
+        return view('subcategories.all',compact(['subcategories']));
     }
 
     public function ajax(Request $request)
@@ -35,15 +34,23 @@ class SubCategoryController extends Controller
 
     public function create()
     {
-        $subcategories = SubCategory::with('category')->get();
+        // $subcategories = SubCategory::with('category')->get();
+        $subcategories = SubCategory::select(
+            'id',
+            'category_id',
+            'name_'. LaravelLocalization::getCurrentLocale(). ' as name'
+            )->get();
+        // $subcategory = SubCategory::findOrFail($subCategory);
         $categories = Category::get();
-        return view('subcategories.create',compact(['subcategories','categories']));
+        // dd($subcategories);
+        return view('subcategories.create',compact(['categories','subcategories']));
     }
 
     public function store(SubCategoryRequest $request)
     {
         SubCategory::create([
-            'name'=>$request->name,
+            'name_ar'=>$request->name_ar,
+            'name_en'=>$request->name_en,
             'category_id'=>$request->category_id,
         ]);
         return redirect()->back()->with(
@@ -53,8 +60,14 @@ class SubCategoryController extends Controller
 
     public function edit($subCategory)
     {
-        $subcategories = SubCategory::get();
+        // $subcategories = SubCategory::get();
+        $subcategories = SubCategory::select(
+            'id',
+            'category_id',
+            'name_'. LaravelLocalization::getCurrentLocale(). ' as name'
+            )->get();
         $subcategory = SubCategory::findOrFail($subCategory);
+        // dd($subcategories);
         return view('subcategories.edit',compact(['subcategory','subcategories']));
     }
 
@@ -64,7 +77,8 @@ class SubCategoryController extends Controller
         $subCat = SubCategory::findOrFail($id);
         // dd($subCat);
         $subCat->update([
-            'name'=> $request->name,
+            'name_ar'=> $request->name_ar,
+            'name_en'=> $request->name_en,
         ]);
         return redirect()->back()->with(['success'=>"$subCat->name updated successfully"]);
     }

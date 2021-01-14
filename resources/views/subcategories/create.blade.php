@@ -11,8 +11,13 @@
         @method('POST')
 
         <div class="form-group">
-            <label class="font-weight-bold" for="name">{{__('messages.SubCategory Name')}}</label>
-            <input type="text" name="name" class="form-control" id="name"  placeholder="{{__('messages.SubCategory Name')}}">
+            <label class="font-weight-bold" for="name_en">{{__('messages.SubCategory Name')}}</label>
+            <input type="text" name="name_en" class="form-control" id="name_en"  placeholder="{{__('messages.SubCategory Name')}}">
+        </div>
+
+        <div class="form-group">
+            <label class="font-weight-bold" for="name_ar">{{__('messages.SubCategory Name ar')}}</label>
+            <input type="text" name="name_ar" class="form-control" id="name_ar"  placeholder="{{__('messages.SubCategory Name ar')}}">
         </div>
 
         <div class="form-group">
@@ -37,18 +42,18 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">{{__('messages.SubCategory Name')}}</th>
-                        <th scope="col">{{__('messages.Category Name')}}</th>
                         @auth
                         <th scope="col">{{__('messages.Operations')}}</th>
                         @endauth
                     </tr>
                 </thead>
                 <tbody>
+ 
                     @forelse ($subcategories as $p)
+
                         <tr>
                             <th scope="row">{{$p->id}}</th>
                             <td class="font-weight-bold ">{{$p->name}}</td>
-                            <td class="font-weight-bold text-secondary">{{$p->category->name}}</td>
                             @auth
                                 <td class="row">
                                     <a href="{{route('subcategory.edit',$p->id)}}"  class="btn btn-info mx-1">{{__('messages.Edit')}}</a>
@@ -61,13 +66,12 @@
                             @endauth
                         </tr>
                     @empty
-                        <div class="alert alert-danger text-center font-weight-bold">
+                        {{--  <div class="alert alert-danger text-center font-weight-bold">
                             {{__('messages.There is no SubCategories')}}
-                        </div>
+                        </div>  --}}
                     @endforelse
                 </tbody>
             </table>
         </div>
     </div>
-
 @endsection

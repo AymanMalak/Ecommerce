@@ -9,9 +9,14 @@
     <form action="{{route('category.update',$category->id)}}" method="post" >
         @csrf
         @method('PUT')
+
         <div class="form-group">
-            <label class="font-weight-bold" for="name">{{__('messages.Name')}}</label>
-            <input type="text" name="name" class="form-control" id="name" value="{{$category->name}}" placeholder="{{__('messages.Category Name')}}">
+            <label class="font-weight-bold" for="name_en">{{__('messages.Category Name')}}</label>
+            <input type="text" name="name_en" class="form-control" id="name_en"  value="{{$category->name_en}}" placeholder="{{__('messages.Category Name')}}">
+        </div>
+        <div class="form-group">
+            <label class="font-weight-bold" for="name_ar">{{__('messages.Category Name ar')}}</label>
+            <input type="text" name="name_ar" class="form-control" id="name_ar"  value="{{$category->name_ar}}" placeholder="{{__('messages.Category Name ar')}}">
         </div>
 
         <button type="submit" class="btn btn-primary">{{__('messages.Submit')}}</button>

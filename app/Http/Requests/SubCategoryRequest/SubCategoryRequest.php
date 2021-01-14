@@ -14,14 +14,16 @@ class SubCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-                'name'=>'required|string|max:100',
+                // 'name_ar'=>'required|string|max:100',
+                // 'name_en'=>'required|string|max:100',
         ];
     }
 
     public function messages()
     {
         return [
-                "name.required" =>  __("name is required"),
+                // "name_ar.required" =>  __("name_ar is required"),
+                // "name_en.required" =>  __("name_en is required"),
         ];
     }
 }

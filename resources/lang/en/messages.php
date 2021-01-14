@@ -77,8 +77,8 @@ return [
     'There is no products' =>  'There is no products',
     'Options' =>  'Options',
     // -------------------------------------
-    '' =>  '',
-    '' =>  '',
+    'SubCategory Name ar' =>  'SubCategory Arabic Name ',
+    'Category Name ar' =>  'Category Arabic Name',
     '' =>  '',
     '' =>  '',
     '' =>  '',

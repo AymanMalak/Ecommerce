@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest\CategoryRequest;
+use LaravelLocalization;
 
 class CategoryController extends Controller
 {
@@ -18,6 +19,12 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = Category::get();
+        $categories = Category::select(
+            'id',
+            'name_'. LaravelLocalization::getCurrentLocale(). ' as name'
+            )->get();
+        // $subcategory = SubCategory::findOrFail($subCategory);
+        // $categories = Category::get();
         return view('categories.create',compact('categories'));
     }
 
@@ -26,7 +33,8 @@ class CategoryController extends Controller
         $categories = Category::get();
 
         Category::create([
-            'name'=>$request->name,
+            'name_en'=>$request->name_en,
+            'name_ar'=>$request->name_ar,
         ]);
 
         return redirect()->back()->with([
@@ -40,7 +48,11 @@ class CategoryController extends Controller
     public function edit($subCategory)
     {
         $category = Category::findOrFail($subCategory);
-        $categories = Category::get();
+        $categories = Category::select(
+            'id',
+            'name_'. LaravelLocalization::getCurrentLocale(). ' as name'
+            )->get();
+        // $categories = Category::get();
         return view('categories.edit',compact(['category','categories']));
     }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2021 at 02:28 PM
+-- Generation Time: Jan 14, 2021 at 06:48 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -29,7 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categories` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_en` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_ar` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -38,11 +39,11 @@ CREATE TABLE `categories` (
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'PC', '2021-01-06 07:00:16', '2021-01-06 07:00:16'),
-(2, 'lAPTOP', '2021-01-06 07:00:30', '2021-01-06 07:00:30'),
-(3, 'TABLET', '2021-01-06 07:00:36', '2021-01-06 07:00:36'),
-(4, 'MOBILE', '2021-01-06 07:00:44', '2021-01-06 07:00:44');
+INSERT INTO `categories` (`id`, `name_en`, `name_ar`, `created_at`, `updated_at`) VALUES
+(1, 'PC', 'كمبيوتر', '2021-01-06 07:00:16', '2021-01-06 07:00:16'),
+(2, 'lAPTOP', 'لابتوب', '2021-01-06 07:00:30', '2021-01-06 07:00:30'),
+(3, 'TABLET', 'تابليت', '2021-01-06 07:00:36', '2021-01-06 07:00:36'),
+(4, 'MOBILE', 'هاتف محمول', '2021-01-06 07:00:44', '2021-01-06 07:00:44');
 
 -- --------------------------------------------------------
 
@@ -119,7 +120,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `price`, `quantity`, `description`, `img`, `status`, `category_id`, `created_at`, `updated_at`) VALUES
-(2, 'Iphone 11 Pro', 14000.00, 3, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'product_5ff95eae2f03f.jpg', NULL, 4, '2021-01-09 05:43:42', '2021-01-09 05:43:42');
+(1, 'Iphone 11 Pro', 15000.00, 10, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'product_5fff26a16c5bf.JPG', NULL, 4, '2021-01-13 14:58:09', '2021-01-13 14:58:09');
 
 -- --------------------------------------------------------
 
@@ -129,7 +130,8 @@ INSERT INTO `products` (`id`, `name`, `price`, `quantity`, `description`, `img`,
 
 CREATE TABLE `subcategories` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_en` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_ar` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `quantity` int(11) DEFAULT NULL,
   `category_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -140,16 +142,15 @@ CREATE TABLE `subcategories` (
 -- Dumping data for table `subcategories`
 --
 
-INSERT INTO `subcategories` (`id`, `name`, `quantity`, `category_id`, `created_at`, `updated_at`) VALUES
-(1, 'Iphone', NULL, 4, '2021-01-06 07:00:58', '2021-01-06 07:00:58'),
-(2, 'Xiaomi', NULL, 4, '2021-01-06 07:01:25', '2021-01-06 07:01:25'),
-(3, 'HP', NULL, 2, '2021-01-06 07:01:37', '2021-01-06 07:01:37'),
-(4, 'Dell', NULL, 2, '2021-01-06 07:01:55', '2021-01-06 07:01:55'),
-(5, 'Fujitsu', NULL, 1, '2021-01-06 07:02:37', '2021-01-06 07:02:37'),
-(6, 'Vivo', NULL, 3, '2021-01-06 07:02:49', '2021-01-06 07:02:49'),
-(7, 'Samsung', NULL, 4, '2021-01-06 07:03:21', '2021-01-06 07:03:21'),
-(8, 'Lenovo', NULL, 2, '2021-01-06 07:03:39', '2021-01-06 07:03:39'),
-(9, 'Oppo', NULL, 4, '2021-01-06 07:03:50', '2021-01-06 07:03:50');
+INSERT INTO `subcategories` (`id`, `name_en`, `name_ar`, `quantity`, `category_id`, `created_at`, `updated_at`) VALUES
+(1, 'Iphone', 'aaa', NULL, 4, '2021-01-06 07:00:58', '2021-01-06 07:00:58'),
+(2, 'Xiaomi', 'bbb', NULL, 4, '2021-01-06 07:01:25', '2021-01-06 07:01:25'),
+(3, 'HP', 'ccc', NULL, 2, '2021-01-06 07:01:37', '2021-01-06 07:01:37'),
+(4, 'Dell', 'ddd', NULL, 2, '2021-01-06 07:01:55', '2021-01-06 07:01:55'),
+(5, 'Fujitsu', 'eee', NULL, 1, '2021-01-06 07:02:37', '2021-01-06 07:02:37'),
+(6, 'Vivo', 'fff', NULL, 3, '2021-01-06 07:02:49', '2021-01-06 07:02:49'),
+(7, 'Samsung', 'ggg', NULL, 4, '2021-01-06 07:03:21', '2021-01-06 07:03:21'),
+(8, 'Lenovo', 'hhh', NULL, 2, '2021-01-06 07:03:39', '2021-01-06 07:03:39');
 
 -- --------------------------------------------------------
 
@@ -173,7 +174,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Ayman Abd Elmalak Fahim', 'aymanabdelmalak11@gmail.com', '2020-12-18 08:48:30', '$2y$10$WkBO.g/VRJUHkYSfCpj/SuKEvzm/cp2mgQVZ6M9QkCMikRuiak1Se', NULL, '2020-12-18 08:47:21', '2020-12-18 08:48:30');
+(1, 'Ayman', 'aymanabdelmalak11@gmail.com', '2020-12-18 08:48:30', '$2y$10$WkBO.g/VRJUHkYSfCpj/SuKEvzm/cp2mgQVZ6M9QkCMikRuiak1Se', NULL, '2020-12-18 08:47:21', '2020-12-18 08:48:30');
 
 --
 -- Indexes for dumped tables
@@ -250,13 +251,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `subcategories`
 --
 ALTER TABLE `subcategories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`

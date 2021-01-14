@@ -10,8 +10,12 @@
         @csrf
         @method('POST')
         <div class="form-group">
-            <label class="font-weight-bold" for="name">{{__('messages.Category Name')}}</label>
-            <input type="text" name="name" class="form-control" id="name"  placeholder="{{__('messages.Category Name')}}">
+            <label class="font-weight-bold" for="name_en">{{__('messages.Category Name')}}</label>
+            <input type="text" name="name_en" class="form-control" id="name_en"  placeholder="{{__('messages.Category Name')}}">
+        </div>
+        <div class="form-group">
+            <label class="font-weight-bold" for="name_ar">{{__('messages.Category Name ar')}}</label>
+            <input type="text" name="name_ar" class="form-control" id="name_ar"  placeholder="{{__('messages.Category Name ar')}}">
         </div>
 
         <button type="submit" class="btn btn-primary">{{__('messages.Submit')}}</button>

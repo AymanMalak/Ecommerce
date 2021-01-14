@@ -10,8 +10,12 @@
         @csrf
         @method('PUT')
         <div class="form-group">
-            <label class="font-weight-bold" for="name">{{__('messages.SubCategory Name')}}</label>
-            <input type="text" name="name" class="form-control" id="name" value="{{$subcategory->name}}" placeholder="{{__('messages.SubCategory Name')}}">
+            <label class="font-weight-bold" for="name_en">{{__('messages.SubCategory Name')}}</label>
+            <input type="text" name="name_en" class="form-control" id="name_en" value="{{$subcategory->name_en}}" placeholder="{{__('messages.SubCategory Name')}}">
+        </div>
+        <div class="form-group">
+            <label class="font-weight-bold" for="name_ar">{{__('messages.SubCategory Name')}}</label>
+            <input type="text" name="name_ar" class="form-control" id="name_ar" value="{{$subcategory->name_ar}}" placeholder="{{__('messages.SubCategory Name')}}">
         </div>
 
         <button type="submit" class="btn btn-primary">{{__('messages.Submit')}}</button>
