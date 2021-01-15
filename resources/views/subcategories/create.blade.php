@@ -44,8 +44,10 @@
                                 @if (LaravelLocalization::getCurrentLocale() == 'ar')
                                 
                         <th scope="col" class="text-center" >{{__('messages.SubCategory Name ar')}}</th>
+                        <th scope="col" class="text-center" >{{__('messages.Category Name ar')}}</th>
                                 @else
                         <th scope="col" class="text-center">{{__('messages.SubCategory Name en')}}</th>
+                        <th scope="col" class="text-center">{{__('messages.Category Name en')}}</th>
                                 
                                 @endif
                         @auth
@@ -56,10 +58,17 @@
                 <tbody>
 
                     @forelse ($subcategories as $p)
+                    
+                    <tr>
+                        <th scope="row">{{$p->id}}</th>
+                        <td class="font-weight-bold text-center">{{$p->name}}</td>
+                        
+                        @if (LaravelLocalization::getCurrentLocale() == 'ar')
+                            <td class="font-weight-bold text-center">{{$p->category->name_ar}}</td>
+                        @else
+                            <td class="font-weight-bold text-center">{{$p->category->name_en}}</td>
+                        @endif
 
-                        <tr>
-                            <th scope="row">{{$p->id}}</th>
-                            <td class="font-weight-bold text-center">{{$p->name}}</td>
                             @auth
                                 <td class="d-flex justify-content-center">
                                     <a href="{{route('subcategory.edit',$p->id)}}"  class="btn btn-info mx-1">{{__('messages.Edit')}}</a>

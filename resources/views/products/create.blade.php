@@ -55,12 +55,12 @@
 
         <div class="form-group">
             <label class="font-weight-bold" for="exampleFormControlTextarea1">{{__('messages.Description en')}}</label>
-            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5"></textarea>
+            <textarea class="form-control" name="description_en" id="exampleFormControlTextarea1" rows="5"></textarea>
         </div>
 
         <div class="form-group">
             <label class="font-weight-bold" for="exampleFormControlTextarea2">{{__('messages.Description ar')}}</label>
-            <textarea class="form-control" name="description" id="exampleFormControlTextarea2" rows="5"></textarea>
+            <textarea class="form-control" name="description_ar" id="exampleFormControlTextarea2" rows="5"></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">{{__('messages.Submit')}}</button>

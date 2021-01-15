@@ -7,6 +7,7 @@ use App\Http\Requests\ProductRequest\AddProductRequest;
 use App\Http\Requests\ProductRequest\EditProductRequest;
 use App\Product;
 use App\Category;
+use App\SubCategory;
 use App\Traits\ProductTrait;
 use Illuminate\Support\Facades\Validator;
 use LaravelLocalization;
@@ -17,15 +18,15 @@ class ProductController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth','verified'])->except('products');
+        $this->middleware(['auth','verified'])->except(['products','show']);
     }
     // table
     public function index()
     {
 
+        // $p = Product::get();
+        // $p->category_id;
         $products= Product::with('category')->get();
-        // $products= Product::get();
-
         if(!$products)
             return redirect()->back()->with(['error'=>'There is no products']);
 
@@ -36,7 +37,16 @@ class ProductController extends Controller
     public function products()
     {
 
-        $products= Product::get();
+        $products = Product::select(
+            'id',
+            'price',
+            'quantity',
+            'img',
+            'category_id',
+            'name_'. LaravelLocalization::getCurrentLocale(). ' as name',
+            'description_'. LaravelLocalization::getCurrentLocale(). ' as description',
+        )->get();
+        // $products= Product::get();
         if(!$products)
             return redirect()->back()->with(['error'=>'There is no products']);
 
@@ -65,11 +75,13 @@ class ProductController extends Controller
 
         // create product
         Product::create([
-            'name'=>$request->name,
+            'name_en'=>$request->name_en,
+            'name_ar'=>$request->name_ar,
             'price'=>$request->price,
             'quantity'=>$request->quantity,
             'img'=>$img_name,
-            'description'=>$request->description,
+            'description_en'=>$request->description_en,
+            'description_ar'=>$request->description_ar,
             'category_id'=>$request->category_id,
         ]);
 
@@ -95,16 +107,16 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $product = Product::select(
-            // 'id',
-            'price',
-            'quantity',
-            'img',
-            'category_id',
-            'name_'. LaravelLocalization::getCurrentLocale(). ' as name',
-            'description_'. LaravelLocalization::getCurrentLocale(). ' as description',
-            )->where('id',$id)->get();
-        // $product = Product::findOrFail($id);
+        // $product = Product::select(
+        //     // 'id',
+        //     'price',
+        //     'quantity',
+        //     'img',
+        //     'category_id',
+        //     'name_'. LaravelLocalization::getCurrentLocale(). ' as name',
+        //     'description_'. LaravelLocalization::getCurrentLocale(). ' as description',
+        //     )->where('id',$id)->get();
+        $product = Product::findOrFail($id);
         // dd($product);
         $categories = Category::get();
 
@@ -129,20 +141,24 @@ class ProductController extends Controller
 
             // dd($extention);
             $product->update([
-                'name'=> $request->name,
+                'name_en'=> $request->name_en,
+                'name_ar'=> $request->name_ar,
                 'price'=> $request->price,
                 'quantity'=> $request->quantity,
                 'img'=> $img_name,
-                'description'=> $request->description,
+                'description_en'=> $request->description_en,
+                'description_ar'=> $request->description_ar,
                 'category_id'=> $request->category_id,
             ]);
         }
 
         $product->update([
-            'name'=> $request->name,
+            'name_en'=> $request->name_en,
+            'name_ar'=> $request->name_ar,
             'price'=> $request->price,
             'quantity'=> $request->quantity,
-            'description'=> $request->description,
+            'description_en'=> $request->description_en,
+            'description_ar'=> $request->description_ar,
             'category_id'=> $request->category_id,
         ]);
 

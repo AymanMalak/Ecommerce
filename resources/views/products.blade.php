@@ -10,7 +10,13 @@
                             
                             <div class="card-body" style="border-top: 1px solid #aaa;">
                                 <h3 class="card-title"> <a href="{{url('product',$p->id)}}">{{$p->name}} </a></h3>
+                                @if (LaravelLocalization::getCurrentLocale() == 'en')
                                 <h5 class="text-primary"> {{$p->price}} LE </h5>
+                                
+                                @else
+                                <h5 class="text-primary"> {{$p->price}} جنيه </h5>
+
+                                @endif
                                 <p class="card-text text-muted">  <?=  Str::substr($p->description,1 ,30)." ..." ?></p>
 
                                 @guest

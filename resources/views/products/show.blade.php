@@ -30,18 +30,18 @@
             <div class="card my-3">
                 <div class="card-body">
                     @if (LaravelLocalization::getCurrentLocale() == 'ar')  
-                        <h2 class="card-title font-weight-bold"> {{__('messages.Product Name ar')}}:  <span class="font-weight-normal  text-primary">  {{$product->name_ar}}</span> </h2>
+                        <h2 class="card-title font-weight-bold"> {{__('messages.Product Name')}}:  <span class="font-weight-normal  text-primary">  {{$product->name_ar}}</span> </h2>
                     @else
-                        <h2 class="card-title font-weight-bold"> {{__('messages.Product Name en')}}:  <span class="font-weight-normal  text-primary">  {{$product->name_en}}</span> </h2>
+                        <h2 class="card-title font-weight-bold"> {{__('messages.Product Name')}}:  <span class="font-weight-normal  text-primary">  {{$product->name_en}}</span> </h2>
                     @endif
                     
                     <h2 class="card-text font-weight-bold "> {{__('messages.Price')}}: <span class="font-weight-normal  text-muted"> {{$product->price}} {{__('messages.LE')}} </span> </h2>
                     <h2 class="card-text font-weight-bold "> {{__('messages.Quantity')}}: <span class="font-weight-normal  text-muted"> {{$product->quantity}} {{__('messages.Pieces')}} </span> </h3>
                     
                     @if (LaravelLocalization::getCurrentLocale() == 'ar')  
-                        <h2 class="card-text font-weight-bold "> {{__('messages.Description ar')}}: <span class="font-weight-normal  text-secondary"> {{$product->description_ar}} </span> </h2>
+                        <h2 class="card-text font-weight-bold "> {{__('messages.Description')}}: <span class="font-weight-normal  text-secondary"> {{$product->description_ar}} </span> </h2>
                     @else
-                        <h2 class="card-text font-weight-bold "> {{__('messages.Description en')}}: <span class="font-weight-normal  text-secondary"> {{$product->description_en}} </span> </h2>
+                        <h2 class="card-text font-weight-bold "> {{__('messages.Description')}}: <span class="font-weight-normal  text-secondary"> {{$product->description_en}} </span> </h2>
                     @endif
                 </div>
             </div>

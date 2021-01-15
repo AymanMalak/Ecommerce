@@ -40,7 +40,7 @@ class SubCategoryController extends Controller
             'id',
             'category_id',
             'name_'. LaravelLocalization::getCurrentLocale(). ' as name'
-            )->get();
+            )->with('category')->get();
 
         // $subcategory = SubCategory::findOrFail($subCategory);
         // $categories = Category::get();
